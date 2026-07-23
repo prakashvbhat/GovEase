@@ -1,0 +1,46 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ink: #050713;
+  --color-mist: #e6f2ff;
+  --font-sans: var(--font-inter), Inter, sans-serif;
+  --shadow-glow: 0 0 80px rgba(94, 234, 212, 0.18);
+}
+
+:root { color-scheme: dark; }
+* { box-sizing: border-box; }
+body { margin: 0; overflow-x: hidden; }
+::selection { background: rgba(94, 234, 212, .35); }
+
+.grid-mask {
+  background-image: linear-gradient(rgba(255,255,255,.08) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.08) 1px, transparent 1px);
+  background-size: 52px 52px;
+  mask-image: linear-gradient(to bottom, black, transparent 72%);
+}
+
+.glass {
+  background: linear-gradient(135deg, rgba(255,255,255,.14), rgba(255,255,255,.045));
+  border: 1px solid rgba(255,255,255,.14);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.12), 0 24px 80px rgba(0,0,0,.35);
+  backdrop-filter: blur(22px);
+}
+
+.typing { overflow: hidden; border-right: 2px solid #5eead4; white-space: nowrap; animation: typing 4s steps(24,end) infinite, blink .8s step-end infinite; }
+.float-slow { animation: float 7s ease-in-out infinite; }
+.float-delay { animation: float 8s ease-in-out 1.2s infinite; }
+.pulse-glow { animation: pulseGlow 3s ease-in-out infinite; }
+.scan-line { animation: scan 2.8s ease-in-out infinite; }
+.counter-pop { animation: counterPop 4s ease-in-out infinite; }
+.loading-dots::after { content: ''; animation: dots 1.2s steps(4,end) infinite; }
+
+@keyframes typing { 0%, 12% { width: 0; } 45%, 78% { width: 100%; } 100% { width: 0; } }
+@keyframes blink { 50% { border-color: transparent; } }
+@keyframes float { 0%,100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-18px) rotate(2deg); } }
+@keyframes pulseGlow { 0%,100% { box-shadow: 0 0 35px rgba(94,234,212,.15); } 50% { box-shadow: 0 0 90px rgba(96,165,250,.28); } }
+@keyframes scan { 0% { transform: translateY(0); opacity: .25; } 50% { transform: translateY(170px); opacity: 1; } 100% { transform: translateY(0); opacity: .25; } }
+@keyframes counterPop { 0%,100% { transform: scale(1); } 50% { transform: scale(1.04); } }
+@keyframes dots { 0% { content: ''; } 25% { content: '.'; } 50% { content: '..'; } 75%,100% { content: '...'; } }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; }
+}
