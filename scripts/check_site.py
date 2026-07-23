@@ -36,6 +36,13 @@ if '@import "tailwindcss";' not in styles:
 if '@tailwindcss/postcss' not in postcss:
     raise SystemExit('PostCSS must use the official @tailwindcss/postcss plugin')
 
+if 'tailwindcss: {}' in postcss or 'autoprefixer' in postcss:
+    raise SystemExit('PostCSS must not use legacy tailwindcss/autoprefixer plugins with Tailwind v4')
+
+for legacy_directive in ['@tailwind base;', '@tailwind components;', '@tailwind utilities;']:
+    if legacy_directive in styles:
+        raise SystemExit(f'Remove legacy Tailwind directive from globals.css: {legacy_directive}')
+
 for removed_file in ['tailwind.config.ts']:
     if Path(removed_file).exists():
         raise SystemExit(f'Remove legacy Tailwind configuration file: {removed_file}')
